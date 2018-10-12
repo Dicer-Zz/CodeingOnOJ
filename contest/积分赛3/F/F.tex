@@ -1,0 +1,64 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[UTF8, scheme = plain]{ctex}
+\renewcommand\thesection{\Alph{section}} \renewcommand\thesubsection{\thesection.\arabic{subsection}}
+\usepackage{geometry}
+\geometry{left=1.5cm,right=2cm,top=2cm,bottom=1.5cm}
+
+% Title
+\title{暑期集训第一次积分训练赛}
+\author{河南理工大学ACM协会 \thanks{name1 name2}}
+\date{2018/7/13}
+
+\begin{document}
+
+\maketitle\newpage
+
+% *************************************      仅修改以下内容        *******************************************
+
+\section{辞树的肥宅快乐水}
+
+\begin{table}[!h]
+  \centering
+  \begin{tabular}{l|l|l}
+  时间限制 & 内存限制 & 出题人 \\
+  \hline
+  1 Second & 512 Mb & 吴丰源 \\
+\end{tabular}
+\end{table}
+
+\subsection*{题目描述}
+
+又到了基情四射的夏天，大家出去约妹子，而肥宅辞树只想宅在机房喝肥宅快乐水。
+辞树一下子买了n瓶肥宅快乐水。已知他一天里至少喝掉一瓶肥宅水且他是一口干掉一整瓶。（肥宅Orz）
+他想要知道自己一共有多少种喝肥宅水的方案。
+两种方案被认为是不同的，当且仅当辞树买的这些肥宅水能喝的天数不同，或者存在一天两种方案喝的肥宅水瓶数不同。
+
+\subsection*{输入}
+
+第一行输入一个正整数T，代表有T组数据$(0<T<11)$
+每组数据有一个正整数n，代表辞树买了n瓶肥宅快乐水。$(0<n<10^8)$
+
+\subsection*{输出}
+
+对于每组数据，输出一行，将方案数用二进制表示输出。
+
+\subsection*{输入样例}
+
+1\newline
+3
+
+\subsection*{输出样例}
+
+100
+
+% 有提示内容的话就去掉下一行行首的注释：符百分号
+ \subsection*{提示}
+3瓶肥宅快乐水的分配方式如下\newline
+1 1 1（三天喝完，一天一瓶）\newline
+2 1（两天喝完，第一天两瓶，第二天一瓶）\newline
+1 2（两天喝完，第一天一瓶，第二天两瓶）
+
+\end{document} 
+
+
+% latex数学符号表 https://blog.csdn.net/u013346007/article/details/54138690

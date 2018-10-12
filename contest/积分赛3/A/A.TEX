@@ -1,0 +1,52 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[UTF8, scheme = plain]{ctex}
+\renewcommand\thesection{\Alph{section}} \renewcommand\thesubsection{\thesection.\arabic{subsection}}
+\usepackage{geometry}
+\geometry{left=1.5cm,right=2cm,top=2cm,bottom=1.5cm}
+
+% Title
+\title{暑期集训第三次积分训练赛}
+\author{河南理工大学ACM协会 \thanks{name1 name2}}
+\date{2018/8/5}
+
+\begin{document}
+
+\maketitle\newpage
+
+% *************************************      仅修改以下内容        *******************************************
+
+\section{Math Problem}
+
+\begin{table}[!h]
+  \centering
+  \begin{tabular}{l|l|l}
+  时间限制 & 内存限制 & 出题人 \\
+  \hline
+  1 Second & 128 Mb & 李战士 \\
+\end{tabular}
+\end{table}
+
+\subsection*{题目描述}
+求
+$$ \sum_{i=1}^n \lfloor \frac {a_i}{k} \rfloor $$
+\newline $\lfloor x \rfloor$ 表示x向下取整
+\subsection*{输入}
+第一行一个整数$T$表示测试组数。$(1 \leq T \leq 10)$\newline
+第二行一个$n$和$k$，$n$表示序列a的长度。$( 1 \leq n ,k\leq 1e6)$\newline
+第三行n个整数表示$a_i$  $( 0 \leq a_i \leq 1e6)$
+\subsection*{输出}
+每组数据输出题目描述的求和值。
+\subsection*{输入样例}
+2 \newline
+2 1 \newline
+3 5  \newline
+3 2 \newline
+1 2 3
+\subsection*{输出样例}
+8 \newline
+2
+% 有提示内容的话就去掉下一行行首的注释：符百分号
+ 
+\end{document}
+
+% latex数学符号表 https://blog.csdn.net/u013346007/article/details/54138690

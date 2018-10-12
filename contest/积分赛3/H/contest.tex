@@ -1,0 +1,61 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[UTF8, scheme = plain]{ctex}
+\renewcommand\thesection{\Alph{section}} \renewcommand\thesubsection{\thesection.\arabic{subsection}}
+\usepackage{geometry}
+\geometry{left=1.5cm,right=2cm,top=2cm,bottom=1.5cm}
+
+% Title
+\title{暑期集训第一次积分训练赛}
+\author{河南理工大学ACM协会 \thanks{name1 name2}}
+\date{2018/7/29}
+
+\begin{document}
+
+\maketitle\newpage
+
+% *************************************      仅修改以下内容        *******************************************
+
+\section{真。签到题}
+
+\begin{table}[!h]
+  \centering
+  \begin{tabular}{l|l|l}
+  时间限制 & 内存限制 & 出题人 \\
+  \hline
+  1 Second & 512 Mb & 李浩阳 \\
+\end{tabular}
+\end{table}
+
+\subsection*{题目描述}
+
+% \newline %换行命令
+A国的n个作战通信基站大部分被C国的特种部队破坏,基站编号1到n，只剩下编号为a和b的通信基站完好，为了快速恢复通信，A国派出zzx和fk两位工程师去修复，A国的通信基站有一个特殊隐蔽的备用系统，只有让两个完好的通信基站向编号为x的基站发送信号，x是这两个完好基站编号的和或者差的绝对值，该被破坏的基站的备用系统才会被激活，工程师才能恢复被破坏的基站，假设zzx工程师先到达可修复的基站进行修复，接着fk去修复下一个，两人轮流修复，问谁会修复最后一个可修复的基站
+
+\subsection*{输入}
+
+输入n,a,b三个整数，代表基站的总数n和剩下的完好的两个基站的编号a,b;\newline
+$1 < n <= 1e5 $\newline
+$1<=a,b<=n$\newline
+处理到文件结束
+\subsection*{输出}
+
+若zzx修复最后一个，输出 zzx,否则输出fk
+
+\subsection*{输入样例}
+
+5 1 4\newline 
+10 3 7
+
+\subsection*{输出样例}
+
+zzx\newline 
+fk
+
+% 有提示内容的话就去掉下一行行首的注释：符百分号
+%\subsection*{提示}
+%收集的能量需要正好为S,T
+
+\end{document} 
+
+
+% latex数学符号表 https://blog.csdn.net/u013346007/article/details/54138690

@@ -1,0 +1,74 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[UTF8, scheme = plain]{ctex}
+\renewcommand\thesection{\Alph{section}} \renewcommand\thesubsection{\thesection.\arabic{subsection}}
+\usepackage{geometry}
+\geometry{left=1.5cm,right=2cm,top=2cm,bottom=1.5cm}
+
+% Title
+\title{暑期集训第一次积分训练赛}
+\author{河南理工大学ACM协会 \thanks{name1 name2}}
+\date{2018/7/13}
+
+\begin{document}
+
+\maketitle\newpage
+
+% *************************************      仅修改以下内容        *******************************************
+
+\section{阶乘之和}
+
+\begin{table}[!h]
+  \centering
+  \begin{tabular}{l|l|l}
+  时间限制 & 内存限制 & 出题人 \\
+  \hline
+  1 Second & 512 Mb & 凡凯 \\
+\end{tabular}
+\end{table}
+
+\subsection*{题目描述}
+
+% \newline %换行命令
+对于整数$p$，给出以下定义\\
+$p=x_{1}!+x_{2}!+x_{3}!+...+x_{q}!(x_{i}<x_{j}for\ all\ i<j )$且$x_{i} \neq 0$\\
+$($注释：p等于多个数的阶乘和，并且$x_{1},x_{2},x_{3},...,x_{q}$为不相等的任意正整数，即组成p的阶乘不重复使用$)$\\
+给定两个整数x,y,判断二者是否能满足以上定义。若二者都满足定义，设x由$k_{1}$个数的阶乘和组成，y由$k_{2}$个数的阶乘和组成，若$k_{1}=k_{2}$，按下述输出格式输出二者的定义形式$($输出时，阶乘按递增形式输出，例如：7=1!+3!$)$。
+
+\subsection*{输入}
+
+第一行输入一个整数T，代表T组测试数据。$(1\leq T \leq 10000)$\\
+接下来T行，每行包含两个整数x,y。$(1\leq x,y \leq 10^{18})$\\
+
+\subsection*{输出}
+对于每组x,y输出包含两部分：\\
+①如果二者都满足以上定义，输出“SEYES”；如果只有其一满足以上定义，输出“YNEOS”；如果二者都不满足以上定义，则输出“ONO”。\\
+②当x,y都满足以上定义且$k_{1}=k_{2}$时，输出二者的定义形式。否者输出“dWvWb”。
+
+
+\subsection*{输入样例}
+4\\
+7 7\\
+1 2\\
+4 2\\
+4 4\\
+
+
+\subsection*{输出样例}
+Case 1:SEYES\\
+7=1!+3!\\
+7=1!+3!\\
+Case 2:SEYES\\
+1=1!\\
+2=2!\\
+Case 3:YNEOS\\
+dWvWb\\
+Case 4:ONO\\
+dWvWb\\
+
+% 有提示内容的话就去掉下一行行首的注释：符百分号
+% \subsection*{提示}
+
+\end{document} 
+
+
+% latex数学符号表 https://blog.csdn.net/u013346007/article/details/54138690

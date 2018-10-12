@@ -1,0 +1,53 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[UTF8, scheme = plain]{ctex}
+\renewcommand\thesection{\Alph{section}} \renewcommand\thesubsection{\thesection.\arabic{subsection}}
+\usepackage{geometry}
+\geometry{left=1.5cm,right=2cm,top=2cm,bottom=1.5cm}
+
+% Title
+\title{暑期集训第一次积分训练赛}
+\author{河南理工大学ACM协会 \thanks{name1 name2}}
+\date{2018/7/13}
+
+\begin{document}
+
+\maketitle\newpage
+
+% *************************************      仅修改以下内容        *******************************************
+
+\section{过河问题}
+
+\begin{table}[!h]
+  \centering
+  \begin{tabular}{l|l|l}
+  时间限制 & 内存限制 & 出题人 \\
+  \hline
+  1 Second & 65535 KB & 丁金峰 \\
+\end{tabular}
+\end{table}
+
+\subsection*{题目描述}
+在漆黑的夜里，N位旅行者来到了一座狭窄而且没有护栏的桥边。如果不借助手电筒的话，大家是无论如何也不敢过桥去的。不幸的是，N个人一共只带了一只手电筒，而桥窄得只够让两个人同时过。如果各自单独过桥的话，N人所需要的时间已知；而如果两人同时过桥，所需要的时间就是走得比较慢的那个人单独行动时所需的时间。问题是，如何设计一个方案，让这N人尽快过桥。 
+% \newline %换行命令
+
+\subsection*{输入}
+多组数据。 \newline
+每组测试数据的第一行是一个整数N(从1到1000，包括1和1000)表示共有N个人要过河 \newline
+每组测试数据的第二行是N个整数Si,表示此人过河所需要花时间。(Si   小于等于 100，大于等于1) \newline
+
+\subsection*{输出}
+输出所有人都过河需要用的最少时间。 \newline
+
+\subsection*{输入样例}
+4\newline
+1 2 5 10
+
+\subsection*{输出样例}
+17
+
+% 有提示内容的话就去掉下一行行首的注释：符百分号
+
+\end{document} 
+
+
+% latex数学符号表 https://blog.csdn.net/u013346007/article/details/54138690

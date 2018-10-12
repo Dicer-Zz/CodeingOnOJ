@@ -1,0 +1,68 @@
+\documentclass[12pt, a4paper]{article}
+
+
+\usepackage[UTF8, scheme = plain]{ctex}
+\renewcommand\thesection{\Alph{section}} \renewcommand\thesubsection{\thesection.\arabic{subsection}}
+\usepackage{geometry}
+\geometry{left=1.5cm,right=2cm,top=2cm,bottom=1.5cm}
+
+% Title
+\title{暑期集训第二次积分训练赛}
+\author{河南理工大学ACM协会 }
+\date{2018/7/27}
+
+\begin{document}
+
+\maketitle\newpage
+
+% *************************************      仅修改以下内容        *******************************************
+
+\section{From The New WorldⅠ}
+
+\begin{table}[!h]
+  \centering
+  \begin{tabular}{l|l|l}
+  时间限制 & 内存限制 & 出题人 \\
+  \hline
+  1 Second & 512 Mb & 朱梓鑫 \\
+\end{tabular}
+\end{table}
+
+\subsection*{题目描述}
+
+% \newline %换行命令
+\indent千年之后,「新世界」的孩子们被彻底地控制和管束著，不合适的记忆被消去，被认为有问题的孩子如同不良产品般被处理......\\
+\\
+Saki和她的小伙伴们在完人学校迎来了第一个学期考试,考试规则如下:\\
+\indent要求你使用自己的咒力对规定的图画进行有限次的念写,你需要找到其中的咒术节点并尽可能的削弱它的咒力值,最后输出最长的咒术节点的长度.\\
+\\
+\indent请你用程序的方式来完成考试,可把图画抽象为一段具体的序列,咒术节点可看为特定的数值,特定的数值连续出现越多咒术节点的咒力值越大.每次操作只能将要修改的值修改为自己的咒力值.(即:给定长度为n的序列,用给出的自身咒力值$p$替换序列中k个数,使规定的数值$x$连续出现的最长长度最短,输出最终最长的$x$的连续的长度.保证$p!=x$)
+\subsection*{输入}
+
+多组输入,请处理到文件结束\\
+第一行依次输入$n,p,x,k$. $n$表示序列的长度,$p$表示自身咒力值,$x$表示咒术节点的值,$k$表示规定修改次数.\\
+$(1 \leq n \leq 100000,1 \leq p \leq 20,0 \leq x \leq 100000,0 \leq k \leq n)$\\
+第二行输入$n$个$a_i $ $(0 \leq a_i \leq 100000000)$表示序列n个元素的值\\
+
+
+\subsection*{输出}
+每行输出咒术节点连续出现最大长度.
+
+\subsection*{输入样例}
+
+7 3 5 3\\
+8 2 5 5 5 5 5 \\
+
+
+\subsection*{输出样例}
+
+1
+
+% 有提示内容的话就去掉下一行行首的注释：符百分号
+ \subsection*{提示}
+样例解释:修改后的序列为8 2 5 3 3 3 5
+最大长度为1
+\end{document} 
+
+
+% latex数学符号表 https://blog.csdn.net/u013346007/article/details/54138690

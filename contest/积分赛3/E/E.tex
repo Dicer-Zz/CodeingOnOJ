@@ -1,0 +1,62 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[UTF8, scheme = plain]{ctex}
+\renewcommand\thesection{\Alph{section}} \renewcommand\thesubsection{\thesection.\arabic{subsection}}
+\usepackage{geometry}
+\geometry{left=1.5cm,right=2cm,top=2cm,bottom=1.5cm}
+
+% Title
+\title{暑期集训第一次积分训练赛}
+\author{河南理工大学ACM协会 \thanks{name1 name2}}
+\date{2018/7/13}
+
+\begin{document}
+
+\maketitle\newpage
+
+% *************************************      仅修改以下内容        *******************************************
+
+\section{玩游戏}
+
+\begin{table}[!h]
+  \centering
+  \begin{tabular}{l|l|l}
+  时间限制 & 内存限制 & 出题人 \\
+  \hline
+  1 Second & 512 Mb & 赵向阳 \\
+\end{tabular}
+\end{table}
+
+\subsection*{题目描述}
+
+% \newline %换行命令
+zxy和wfy用几堆石子在做游戏。偶数堆石子排成一行，每堆都有正整数颗石子 a[i] 。游戏以谁手中的石子最多来决出胜负。石子的总数是奇数，所以没有平局。\newline
+zxy和wfy轮流进行，wfy先开始。 每回合，玩家从一行的开始或结束处取走整堆石头。 这种情况一直持续到没有更多的石子堆为止，此时手中石子最多的玩家获胜。\newline假设zxy和wfy都发挥出最佳水平，当zxy赢得比赛时输出“zxy” ，当wfy赢得比赛时输出“wfy”。
+\subsection*{输入}
+有T组输入，每个输入后有一个$n$,在$n$后有$n$个数字,$a_1,a_2....a_{n}$。
+\newline
+n的范围是$1\leq n\leq1e^5$
+\newline
+$1\leq a\leq1e^5$ 
+
+\subsection*{输出}
+
+输出胜利者的名字"zxy"或者"wfy"
+
+\subsection*{输入样例}
+1\newline
+4\newline
+5 3 4 5\newline
+\subsection*{输出样例}
+wfy\newline
+
+% 有提示内容的话就去掉下一行行首的注释：符百分号
+ \subsection*{提示}
+wfy先开始，只能拿前 5 颗或后 5 颗石子 。\newline
+假设他取了前 5 颗，这一行就变成了 [3,4,5] 。\newline
+如果zxy拿走前 3 颗，那么剩下的是 [4,5]，wfy拿走后 5 颗赢得 10 分。\newline
+如果zxy拿走后 5 颗，那么剩下的是 [3,4]，wfy拿走后 4 颗赢得 9 分。\newline
+这表明，取前 5 颗石子对wfy来说是一个胜利的举动，所以我们输出wfy 。
+\end{document} 
+
+
+% latex数学符号表 https://blog.csdn.net/u013346007/article/details/54138690
