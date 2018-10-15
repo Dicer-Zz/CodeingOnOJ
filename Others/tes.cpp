@@ -1,47 +1,58 @@
-#include <iostream>
-#include<cstdio>
+/*---------------------------------
+
+ @Author:   Dicer
+ @DateTime: 2018-10-12 19:59:33
+
+---------------------------------*/
+
+#pragma GCC optimize(2)
+#pragma GCC optimize(3)
+#include <bits/stdc++.h>
 using namespace std;
-typedef long long LL;
-const int maxn=1e7+5,maxn2=7e5;
-int pri[maxn2];   
-bool tag[maxn];
-int top=0;
-void getpri(){
-	for(int i=2;i<maxn;i++){
-		if(!tag[i])pri[top++]=i;
-		for(int j=0;j<top&&i*pri[j]<maxn;j++){
-			tag[i*pri[j]]=1;
-			if(i%pri[j]==0)break;
+#define LL __int128;
+#define clr(s, x) memset(s, x, sizeof(s))
+typedef unsigned long long ull;
+typedef long long ll;
+typedef pair<int, int> pii;
+inline LL read(){int r=0;char c=getchar();while(c<'0'||c>'9') {c=getchar();}while(c>='0'&&c<='9') {r=r*10+c-'0';c=getchar();}return r;}
+inline LL readll(){ll r=0;char c=getchar();while(c<'0'||c>'9') {c=getchar();}while(c>='0'&&c<='9') {r=r*10+c-'0';c=getchar();}return r;}
+inline LL qpow(LL a,LL b){LL res=1;while(b){if(b&1)res = res*a;a=a*a;b>>=1;}return res;}
+inline ll gcd(ll a,ll b){while(b^=a^=b^=a%=b);return a;}
+const double eps = 1e-8;
+const ll LLINF = 0x3f3f3f3f3f3f3f3f;
+const int INF = 0x3f3f3f3f;
+const int MAXN = 1e5;
+const int MAXM = 1e5;
+inline void print(LL x)
+{
+    if(x>9)
+        print(x/10);
+    putchar(x%10+'0');
+}
+LL a[81][81];
+
+int main(int argc, char const *argv[])
+{
+	int n, m;
+	cin >> n >> m;
+	for(int i=1; i<=n; ++i){
+		for(int j=1; j<=m; ++j){
+			a[i][j] = read();
 		}
 	}
-} 
-int main(int argc, char *argv[]) {
-	//freopen("cin.txt","r",stdin);
-	int n,i,j;
-	LL t;
-	getpri();
-	while(cin>>n){
-		for(i=1;i<=n;i++){
-			scanf("%lld",&t);
-			LL tmp=t,ans=1;
-			int po=0;
-			while(tmp%2==0){
-				tmp/=2;
+	LL ans = 0;
+	for(int i=1; i<=n; ++i){
+		int p = 1, q = m;
+		LL cnt = 1;
+		while(p<=q){
+			if(a[i][p] >= a[i][q]){
+				ans += a[i][q--]*qpow((LL)2,cnt++);
 			}
-            for(j=1;j<top&&pri[j]<=tmp;j++){
-            	if(tmp%pri[j]==0){
-            		po=1;
-            		tmp/=pri[j];
-            	    while(tmp%pri[j]==0){
-            		    po++;
-            		    tmp/=pri[j];
-            	    }
-            	    ans=ans*(po+1);
-				}
-            }
-            if(tmp>1)ans*=2;  //有大于10^7的素因子出现，且一定只有一个. 
-			printf("Case %d: %lld\n",i,ans-1);			
+			else{
+				ans += a[i][p++]*qpow((LL)2,cnt++);
+			}
 		}
 	}
+	print(ans);
 	return 0;
 }
