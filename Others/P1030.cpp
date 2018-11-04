@@ -1,10 +1,9 @@
-/*---------------------------------
-
- @Author:   Dicer
- @DateTime: 2018-11-04 11:38:31
-
----------------------------------*/
-
+/*
+* @Author: Dicer
+* @Date:   2018-10-23 22:13:58
+* @Last Modified by:   Dicer
+* @Last Modified time: 2018-10-23 22:38:08
+*/
 #pragma GCC optimize(2)
 #pragma GCC optimize(3)
 #include <bits/stdc++.h>
@@ -25,18 +24,29 @@ const int mod = 1e9+7;
 const int MAXN = 1e5;
 const int MAXM = 1e5;
 
+void dfs(string a, string b){
+	if(a.size() < 1){return;}
+	char p = b[b.size()-1];
+	int pos = a.find(p);
+	cout << p;
+	dfs(a.substr(0,pos), b.substr(0,pos));
+	dfs(a.substr(pos+1), b.substr(pos, b.size()-pos-1));
+}
 int main(int argc, char const *argv[])
 {
-	#ifndef ONLINE_JUDGE
-	    freopen("in.txt", "r", stdin);
-	    freopen("out.txt", "w", stdout);
-	#endif 
+	// #ifndef ONLINE_JUDGE
+	//     freopen("in.txt", "r", stdin);
+	//     freopen("out.txt", "w", stdout);
+	//     double _begin_time = clock();
+	// #endif
+	
+	string a, b;
+	cin >> a >> b;
+	dfs(a, b);
 
-	int n, m, k, l;
-	cin >> n >> m >> k >> l;
-	if(n-k < m)	cout << -1 << endl;
-	else{	
-		cout << n*ceil(l/k) << endl;
-	}
+	// #ifndef ONLINE_JUDGE
+	//     double _end_time = clock();
+	//     printf("time = %lf ms.", _end_time - _begin_time);
+	// #endif
 	return 0;
 }

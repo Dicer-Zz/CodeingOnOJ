@@ -1,10 +1,9 @@
-/*---------------------------------
-
- @Author:   Dicer
- @DateTime: 2018-11-04 11:38:31
-
----------------------------------*/
-
+/*
+* @Author: Dicer
+* @Date:   2018-10-23 22:40:10
+* @Last Modified by:   Dicer
+* @Last Modified time: 2018-10-23 22:50:00
+*/
 #pragma GCC optimize(2)
 #pragma GCC optimize(3)
 #include <bits/stdc++.h>
@@ -25,18 +24,51 @@ const int mod = 1e9+7;
 const int MAXN = 1e5;
 const int MAXM = 1e5;
 
+int ls[30];
+int rs[30];
+int in[30];
+
+
+void dfs(int x){
+	if(x == -1)	return;
+	printf("%c", x+'a');
+	dfs(ls[x]);
+	dfs(rs[x]);
+}
 int main(int argc, char const *argv[])
 {
-	#ifndef ONLINE_JUDGE
-	    freopen("in.txt", "r", stdin);
-	    freopen("out.txt", "w", stdout);
-	#endif 
+	// #ifndef ONLINE_JUDGE
+	//     freopen("in.txt", "r", stdin);
+	//     freopen("out.txt", "w", stdout);
+	//     double _begin_time = clock();
+	// #endif
 
-	int n, m, k, l;
-	cin >> n >> m >> k >> l;
-	if(n-k < m)	cout << -1 << endl;
-	else{	
-		cout << n*ceil(l/k) << endl;
+	int n;
+	cin >> n;
+	string s;
+	clr(in, 0);
+	clr(ls, -1);
+	clr(rs, -1);
+	for(int i=1;i<=n;++i){
+		cin >> s;
+		if(s[1] != '*'){
+			in[s[1]-'a']++;
+			ls[s[0]-'a'] = s[1]-'a';
+		}
+		if(s[2] != '*'){
+			in[s[2]-'a']++;
+			rs[s[0]-'a'] = s[2]-'a';
+		}
 	}
+	for(int i=0;i<=26;++i){
+		if(in[i] != 0)	continue;
+		if(ls[i] == -1 && rs[i] == -1)	continue;
+		dfs(i);
+		break;
+	}
+	// #ifndef ONLINE_JUDGE
+	//     double _end_time = clock();
+	//     printf("time = %lf ms.", _end_time - _begin_time);
+	// #endif
 	return 0;
 }

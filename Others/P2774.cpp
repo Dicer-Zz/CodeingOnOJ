@@ -1,7 +1,7 @@
 /*---------------------------------
 
  @Author:   Dicer
- @DateTime: 2018-11-04 11:38:31
+ @DateTime: 2018-10-16 20:57:26
 
 ---------------------------------*/
 
@@ -25,18 +25,58 @@ const int mod = 1e9+7;
 const int MAXN = 1e5;
 const int MAXM = 1e5;
 
+int dp[23][23333];
+int sum[23][23333];
+int mp[23][23];
+int sta[23333];
 int main(int argc, char const *argv[])
 {
 	#ifndef ONLINE_JUDGE
 	    freopen("in.txt", "r", stdin);
 	    freopen("out.txt", "w", stdout);
-	#endif 
-
-	int n, m, k, l;
-	cin >> n >> m >> k >> l;
-	if(n-k < m)	cout << -1 << endl;
-	else{	
-		cout << n*ceil(l/k) << endl;
+	    double _begin_time = clock();
+	#endif
+	int	n, m;
+	while(cin >> n >> m){
+		int cnt = 0;
+		for(int i=0;i<(1<<m);++i){
+			if(!(i&(i<<1))){
+				sta[cnt++] = i;
+				// debug(i);
+			}
+		}
+		// cout << cnt << endl;
+		for(int i=1;i<=n;++i){
+			for(int j=0;j<m;++j){
+				cin >> mp[i][j];
+			}
+		}
+		clr(dp, 0);	clr(sum, 0);
+		for(int i=1;i<=n;++i){
+			for(int j=0;j<cnt;++j){
+				for(int k=0;k<m;++k){
+					if((sta[j]>>k)&1){
+						sum[i][j] += mp[i][k];
+					}
+				}
+				// debug(sum[i][j]);
+			}
+		}
+		for(int i=1;i<=n;++i){
+			for(int j=0;j<cnt;++j){
+				for(int k=0;k<cnt;++k){
+					if(sta[j]&sta[k])	continue;
+					dp[i][j] = max(dp[i][j],dp[i-1][k]+sum[i][j]);
+				}
+			}
+		}
+		int ans = 0;
+		for(int i=0;i<cnt;++i)	ans = max(ans, dp[n][i]);
+		cout << ans << endl;
 	}
+	#ifndef ONLINE_JUDGE
+	    double _end_time = clock();
+	    printf("time = %.2lf ms.", _end_time - _begin_time);
+	#endif
 	return 0;
 }

@@ -1,11 +1,22 @@
-#pragma GCC optimize(2)
-#pragma GCC optimize(3)
-#include <bits/stdc++.h>
+/*
+* @Author: Dicer
+* @Date:   2018-07-27 20:12:22
+* @Last Modified by:   Dicer
+* @Last Modified time: 2018-10-30 13:35:26
+*/
+
+#include <iostream>
+#include <vector>
+#include <string.h>
+#include <stdio.h>
+#include <queue>
+#include <time.h>
 using namespace std;
 #define clr(s, x) memset(s, x, sizeof(s))
 typedef long long ll;
 typedef unsigned long long ull;
 typedef pair<int, int> pii;
+#define debug(...) cerr<<"["<<#__VA_ARGS__":"<<(__VA_ARGS__)<<"]"<<"\n"
 inline int read(){int r=0;char c=getchar();while(c<'0'||c>'9') {c=getchar();}while(c>='0'&&c<='9') {r=r*10+c-'0';c=getchar();}return r;}
 inline ll readll(){ll r=0;char c=getchar();while(c<'0'||c>'9') {c=getchar();}while(c>='0'&&c<='9') {r=r*10+c-'0';c=getchar();}return r;}
 inline ll qpow(ll a,ll b,ll mod){ll res=1;while(b){if(b&1)res = (res*a)%mod;a=(a*a)%mod;b>>=1;}return res;}
@@ -14,49 +25,79 @@ const double eps = 1e-8;
 const ll LLINF = 0x3f3f3f3f3f3f3f3f;
 const int INF = 0x3f3f3f3f;
 const int mod = 1e9+7;
-const int MAXN = 1e5;
-const int MAXM = 1e5;
+const int N = 1e5;
+const int M = 1e5;
 
-int dp[10], p;
-void solve(int res){
-	for(int i=1; i<=7; ++i){
-		bool flag = 1;
-		for(int j=0; j<=2; ++j){
-			if(((res>>j)&1) && !((i>>j)&1))	flag = 0;
-		}
-		if(flag) dp[i] = min(dp[i], dp[i-res] + p);
-	}
+struct EDGE{
+    int next;
+    int to;
+    int w;
+}edge[M];
+
+int n,m,k,s,e,cnt;
+int head[N],dis[N];
+bool vis[N]; 
+
+void add(int u, int v, int w){
+    edge[cnt].next = head[u];
+    edge[cnt].to = v;
+    edge[cnt].w  = w;
+    head[u] = cnt++;
+}
+
+struct NODE{
+    int id,dist;
+}q,p;
+bool operator < (NODE a, NODE b){
+    return a.dist > b.dist;
+}
+void Dijkstra(){
+    memset(dis, INF, sizeof dis);
+    memset(vis, 0, sizeof vis);
+    priority_queue<NODE> que;
+    p.id = s; p.dist = 0; 
+    dis[s] = 0; que.push(p); 
+    while(!que.empty()){
+        q = que.top(); que.pop();
+        // cout << q.id << endl;
+        if(vis[q.id])   continue;
+        vis[q.id] = true;
+        for(int i=head[q.id]; ~i; i=edge[i].next){
+            int u = edge[i].to;
+            if(dis[u] > q.dist + edge[i].w){
+                dis[u] = q.dist + edge[i].w;
+                p.id = u;
+                p.dist = dis[u];
+                que.push(p);
+            }
+        }
+    }
+    cout << dis[n] << endl;
 }
 int main(int argc, char const *argv[])
 {
-	ios::sync_with_stdio(false);
-	int n;
-	while(cin >> n){
-		int res;
-		string s;
-		clr(dp, 0x3f);
-		dp[0] = 0;
-		for(int i=1; i<=n; ++i){
-			cin >> p;
-			cin >> s;
-			res = 0;
-			if((int)s.find('A') != -1)	res+=1;
-			if((int)s.find('B') != -1)	res+=2;
-			if((int)s.find('C') != -1)	res+=4;
-			// cout << res << endl;
-			for(int i=1; i<=7; ++i){
-				bool flag = 1;
-				for(int j=0; j<=2; ++j){
-					if(((i>>j)&1) && !((res>>j)&1)){
-						flag = 0;
-					}
-				}
-				if(flag) solve(i);
-			}
-			// cout << dp[7] << endl;
+	#ifndef ONLINE_JUDGE
+	    freopen("in.txt", "r", stdin);
+	    freopen("out.txt", "w", stdout);
+	    double _begin_time = clock();
+	#endif
+	
+	int u, v, w;
+	while(cin >> m >> n){
+		cnt = 0;
+		memset(head, -1, sizeof head);
+		s = 1; e = n;
+		while(m--){
+			cin >> u >> v >> w;
+			add(u,v,w);
+			add(v,u,w);
 		}
-		if(dp[7] >= INF)	puts("-1");
-		else cout << dp[7] << endl;
+		Dijkstra();
 	}
+
+	#ifndef ONLINE_JUDGE
+	    double _end_time = clock();
+	    printf("time = %lf ms.", _end_time - _begin_time);
+	#endif
 	return 0;
 }

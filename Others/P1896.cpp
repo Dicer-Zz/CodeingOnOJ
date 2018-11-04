@@ -1,10 +1,9 @@
-/*---------------------------------
-
- @Author:   Dicer
- @DateTime: 2018-11-04 11:38:31
-
----------------------------------*/
-
+/*
+* @Author: Dicer
+* @Date:   2018-10-17 21:37:37
+* @Last Modified by:   Dicer
+* @Last Modified time: 2018-10-18 12:38:43
+*/
 #pragma GCC optimize(2)
 #pragma GCC optimize(3)
 #include <bits/stdc++.h>
@@ -25,18 +24,47 @@ const int mod = 1e9+7;
 const int MAXN = 1e5;
 const int MAXM = 1e5;
 
+
+int sta[233];
+int sum[2333];
+int dp[23][233][2333];
+int cnt = 0;
+int n, k;=
 int main(int argc, char const *argv[])
 {
 	#ifndef ONLINE_JUDGE
 	    freopen("in.txt", "r", stdin);
 	    freopen("out.txt", "w", stdout);
-	#endif 
+	    double _begin_time = clock();
+	#endif
 
-	int n, m, k, l;
-	cin >> n >> m >> k >> l;
-	if(n-k < m)	cout << -1 << endl;
-	else{	
-		cout << n*ceil(l/k) << endl;
+	cin >> n >> k;
+	for(int i=0;i<(1<<n);++i){
+		if(i&(i<<1))	continue;
+		sta[cnt++] = i;
+		for(int j=0;j<n;++j){
+			if((i>>j)&1){
+				sum[i]++;
+			}
+		}
 	}
+	for(int i=0;i<cnt;++i)	dp[1][sum[sta[i]]][i] = 1;
+	for(int i=2;i<=n;++i){
+		for(int j=0;j<cnt;++j){
+			for(int p=0;p<cnt;++p){
+				if(sta[j]&sta[p])	continue;
+				if(sta[j]&(sta[p]<<1))	continue;
+				if((sta[j]<<1)&sta[p])	continue;
+				for(int c=sum[j];c<=k;++c)	dp[i][c][j] += dp[i-1][c-sum[j]][p];
+			}
+		}
+	}
+	int ans = 0;
+	for(int i=0;i<cnt;++i)	ans += dp[n][k][i];
+	cout << ans << endl;
+	#ifndef ONLINE_JUDGE
+	    double _end_time = clock();
+	    printf("time = %lf ms.", _end_time - _begin_time);
+	#endif
 	return 0;
 }

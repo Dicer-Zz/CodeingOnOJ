@@ -1,7 +1,7 @@
 /*---------------------------------
 
  @Author:   Dicer
- @DateTime: 2018-11-04 11:38:31
+ @DateTime: 2018-10-23 21:43:37
 
 ---------------------------------*/
 
@@ -25,18 +25,47 @@ const int mod = 1e9+7;
 const int MAXN = 1e5;
 const int MAXM = 1e5;
 
+int a[23];
+int dfs(int x, string s){
+	if(x == 0){
+		if(s[0] == '0'){
+			cout << 'B';
+			return 1;
+		} else{
+			cout << 'I';
+			return 2;
+		}
+	}
+	int flag = 0;
+	flag |= dfs(x-1, s.substr(0, a[x-1]));
+	flag |= dfs(x-1, s.substr(a[x-1]));
+	if(flag == 1){
+		cout << 'B';
+	} else if(flag == 2){
+		cout << 'I';
+	} else	cout << 'F';
+	return flag;
+}
 int main(int argc, char const *argv[])
 {
 	#ifndef ONLINE_JUDGE
 	    freopen("in.txt", "r", stdin);
 	    freopen("out.txt", "w", stdout);
-	#endif 
+	    double _begin_time = clock();
+	#endif
+	
+	a[0] = 1;
+	for(int i=1;i<=12;++i)	a[i] = a[i-1]*2;
+	int n;
+	string s;
+	cin >> n >> s;
+	dfs(n, s);
+	// cout << s.substr(0,a[n-1]) << endl;
+	// cout << s.substr(a[n-1]) << endl;
 
-	int n, m, k, l;
-	cin >> n >> m >> k >> l;
-	if(n-k < m)	cout << -1 << endl;
-	else{	
-		cout << n*ceil(l/k) << endl;
-	}
+	#ifndef ONLINE_JUDGE
+	    double _end_time = clock();
+	    printf("time = %lf ms.", _end_time - _begin_time);
+	#endif
 	return 0;
 }
