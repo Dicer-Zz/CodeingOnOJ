@@ -1,42 +1,57 @@
-/*---------------------------------
-
- @Author:   Dicer
- @DateTime: 2018-11-04 11:38:31
-
----------------------------------*/
-
-#pragma GCC optimize(2)
-#pragma GCC optimize(3)
-#include <bits/stdc++.h>
-using namespace std;
-#define clr(s, x) memset(s, x, sizeof(s))
+#include<bits/stdc++.h>
 typedef long long ll;
-typedef unsigned long long ull;
-typedef pair<int, int> pii;
-#define debug(...) cerr<<"["<<#__VA_ARGS__":"<<(__VA_ARGS__)<<"]"<<"\n"
-inline int read(){int r=0;char c=getchar();while(c<'0'||c>'9') {c=getchar();}while(c>='0'&&c<='9') {r=r*10+c-'0';c=getchar();}return r;}
-inline ll readll(){ll r=0;char c=getchar();while(c<'0'||c>'9') {c=getchar();}while(c>='0'&&c<='9') {r=r*10+c-'0';c=getchar();}return r;}
-inline ll qpow(ll a,ll b,ll mod){ll res=1;while(b){if(b&1)res = (res*a)%mod;a=(a*a)%mod;b>>=1;}return res;}
-inline ll gcd(ll a,ll b){while(b^=a^=b^=a%=b);return a;}
-const double eps = 1e-8;
-const ll LLINF = 0x3f3f3f3f3f3f3f3f;
-const int INF = 0x3f3f3f3f;
-const int mod = 1e9+7;
-const int MAXN = 1e5;
-const int MAXM = 1e5;
-
-int main(int argc, char const *argv[])
-{
+typedef pair<int, int > pii;
+using namespace std;
+const int MAXN = 5e5 + 7;
+const int mod = 1e9 + 7;
+vector<pii> G[MAXN];
+int Node[MAXN], XOR[MAXN], fat[MAXN];
+ll tot[MAXN];
+int dfs(int x,int fa){
+	fat[x] = fa;
+    int sz = G[x].size();
+    int res = 0;
+    for(int i=0;i<sz;++i){
+        int u = G[x][i].u;
+        if(u != fa){
+            res += dfs(u, x) + G[x][i].w;
+        }
+    }
+    Node[x] = res;
+    return Node[x];
+}
+int main(){
 	#ifndef ONLINE_JUDGE
 	    freopen("in.txt", "r", stdin);
 	    freopen("out.txt", "w", stdout);
-	#endif 
+	#endif
 
-	int n, m, k, l;
-	cin >> n >> m >> k >> l;
-	if(n-k < m)	cout << -1 << endl;
-	else{	
-		cout << n*ceil(l/k) << endl;
-	}
-	return 0;
+    int n;
+    scanf("%d", &n);
+    int u, v, w;
+    for(int i=1;i<n;++i){
+        scanf("%d %d %d", &u, &v, &w);
+        u++, v++;
+        G[v].push_back(make_pair(u, w));
+        G[u].push_back(make_pair(v, w));
+    }
+    dfs(1, 0);
+    for(int i=1;i<=n;++i){
+    	int res = n-1;
+		for(int j=0;j<(int)G[i].size();++j){
+			int u = G[i][j];
+			if(u != fat[i])	tot[i] += (ll)Node[u]*(res-Node[u]);
+			else	tot[i] += (ll)(n-Node[i])*(Node[i]-1);
+			//cout << u << ' ' << Node[u] << endl;
+		}
+		//cout << tot[i] << endl << endl;
+		tot[i] /= 2;
+		tot[i] += n-1;
+    }
+    int ans = 0;
+    for(int i=1;i<=n;++i){
+        if(tot[i]%2)	ans ^= XOR[i];
+    }
+    printf("%d\n", ans);
+    return 0;
 }

@@ -1,3 +1,10 @@
+/*---------------------------------
+
+ @Author:   Dicer
+ @DateTime: 2018-11-12 21:36:05
+
+---------------------------------*/
+
 #pragma GCC optimize(2)
 #pragma GCC optimize(3)
 #include <bits/stdc++.h>
@@ -82,14 +89,17 @@ int main(){
 				a[len-1] -= 1;
 			}
 		}
-		while(a[0] == 'A' && a.length()>1)	a.erase(0,1);
+		// cout << a << endl;
 		ll n, m;
 		reverse(a.begin(),a.end());
 		reverse(b.begin(),b.end());
 		n = cnt(a);
 		m = cnt(b);
+		// cout << n << ' ' << m << endl;
+		// cout << a << ' ' << b << endl;
+		// cout << go(a) << ' ' << go(b) << endl;
 		cout << "Case " << "#" << kas++ << ": ";
-		cout << ((m-n-go(b)+go(a))%mod+mod)%mod << endl;
+		cout << (m-n-go(b)+go(a)+mod)%mod << endl;
 	}
 	return 0;
 }

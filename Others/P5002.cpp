@@ -1,8 +1,8 @@
 /*
 * @Author: Dicer
-* @Date:   2018-07-27 20:12:22
+* @Date:   2018-09-10 23:29:56
 * @Last Modified by:   Dicer
-* @Last Modified time: 2018-11-16 23:26:23
+* @Last Modified time: 2018-11-05 16:03:37
 */
 #pragma GCC optimize(2)
 #pragma GCC optimize(3)
@@ -21,25 +21,30 @@ const double eps = 1e-8;
 const ll LLINF = 0x3f3f3f3f3f3f3f3f;
 const int INF = 0x3f3f3f3f;
 const int mod = 1e9+7;
-const int MAXN = 1e6+7;
-const int MAXM = 1e5;
+const int MAXN = 2e4;
+const int MAXM = 2e4;
 
-vector<char > mp[MAXN];
-vector<int > vis[MAXN];
-int dx[4] = {0,0,1,-1};
-int dy[4] = {1,-1,0,0};
-int n, m;
-int dfs(int x, int y){
-	int ans = 0;
-	for(int i=0;i<4;++i){
-		int xx = x+dx[i];
-		int yy = y+dy[i];
-		if(!(xx>=0 && y>=0 && x<n && y<m))	continue;
-		if(mp[xx][yy] == '#' || vis[xx][yy])	continue;
-		
+
+vector<int> G[MAXN];
+int ans[MAXN], fat[MAXN], cnt[MAXN];
+void add(int u, int v){
+	G[u].push_back(v);
+}
+
+int DFS(int x, int fa){
+	// cout << x << endl;
+	fat[x] = fa;
+	if(cnt[x])	return cnt[x];
+	int size = G[x].size();
+	int res = 0;
+	for(int i=0;i<size;++i){
+		int u = G[x][i];
+		if(u != fa){
+			res += DFS(u, x);
+		}
 	}
-	if(ans)	mp[x][y] = '#';
-	return ans;
+	cnt[x] = res + 1;
+	return cnt[x];
 }
 int main(int argc, char const *argv[])
 {
@@ -48,31 +53,39 @@ int main(int argc, char const *argv[])
 	    freopen("out.txt", "w", stdout);
 	#endif
 	
-	char x;
-	cin >> n >> m;
-	for(int i=0;i<n;++i){
-		for(int j=0;j<m;++j){
-			cin >> x;
-			mp[i].push_back(x);
-			vis[i].push_back(0);
-		}
+	int n, r, m, u, v;
+	cin >> n >> r >> m;
+	for(int i=1;i<n;++i){
+		cin >> u >> v;
+		add(u,v);
+		add(v,u);
 	}
-	for(int i=0;i<n;++i){
-		for(int j=0;j<m;++j){
-			if(vis[i][j] == 0 && mp[i][j] != '#'){
-				dfs(i, j);
+	DFS(r, 0);
+	for(int i=1; i<=n; ++i){
+		int res = 0;
+		int size = G[i].size();
+		for(int j=0; j<size; ++j){
+			int u = G[i][j];
+			if(fat[i] != u){
+				res += cnt[u];
+				res %= mod;
 			}
 		}
-	}
-	int cnt = 0;
-	for(int i=0;i<n;++i){
-		for(int j=0;j<m;++j){
-			// cout << vis[i][j] << endl;
-			if(vis[i][j] == 0 || mp[i][j] != '#'){
-				cnt++;
+		// cout << res << endl;
+		for(int j=0; j<size; ++j){
+			int u = G[i][j];
+			if(fat[i] != u){
+				ans[i] = ans[i] + (ll)cnt[u]*(res-cnt[u])%mod;
+				ans[i] %= mod;
 			}
 		}
+		ans[i] += 2*cnt[i]-1+mod;
+		ans[i] %= mod;
+		// cout << ans[i] << endl;
 	}
-	cout << cnt << endl;
+	while(m--){
+		cin >> r;
+		cout << ans[r] << endl;
+	}
 	return 0;
 }

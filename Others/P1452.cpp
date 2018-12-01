@@ -1,8 +1,8 @@
 /*
 * @Author: Dicer
-* @Date:   2018-08-23 21:40:48
+* @Date:   2018-11-08 16:33:02
 * @Last Modified by:   Dicer
-* @Last Modified time: 2018-11-16 23:00:04
+* @Last Modified time: 2018-11-08 22:21:34
 */
 #pragma GCC optimize(2)
 #pragma GCC optimize(3)
@@ -21,16 +21,48 @@ const double eps = 1e-8;
 const ll LLINF = 0x3f3f3f3f3f3f3f3f;
 const int INF = 0x3f3f3f3f;
 const int mod = 1e9+7;
-const int MAXN = 1e5;
-const int MAXM = 1e5;
+const int MAXN = 2e5;
+const int MAXM = 2e5;
 
+
+vector<int > b;
+int a[MAXN],y[MAXN],c[MAXN];
 int main(int argc, char const *argv[])
 {
-	// #ifndef ONLINE_JUDGE
-	//     freopen("in.txt", "r", stdin);
-	//     freopen("out.txt", "w", stdout);
-	// #endif
-	
-	cout << 3 << " " << 1 << endl;
+	#ifndef ONLINE_JUDGE
+	    freopen("in.txt", "r", stdin);
+	    freopen("out.txt", "w", stdout);
+	#endif
+
+	int n, m, x;
+	cin >> n >> m;
+	for(int i=1;i<=n+m;++i){
+		cin >> a[i];	
+	}
+	for(int i=1;i<=n+m;++i){
+		cin >> y[i];
+		if(y[i]){
+			b.push_back(a[i]);
+		}
+	}
+	for(int i=1;i<=n+m;++i){
+		if(y[i])	continue;
+		x = lower_bound(b.begin(), b.end(), a[i]) - b.begin();
+		// cout << i << ' ' << x << endl;
+		if(x == 0){
+			c[0]++;
+		} else if(x == m){
+			c[m-1]++;
+		} else{
+			if(abs(b[x]-a[i]) >= abs(a[i]-b[x-1])){
+				c[x-1]++;
+			} else{
+				c[x]++;
+			}
+		}
+	}
+	for(int i=0;i<m;++i){
+		cout << c[i] << ' ';
+	}
 	return 0;
 }
