@@ -10,7 +10,7 @@ struct node{
 	double  pd;
 }a[105];
 int cmp(node x,node y){
-	return x.pd < y.pd;
+	return x.pd < y.pd;a
 }
 
 int main(){
