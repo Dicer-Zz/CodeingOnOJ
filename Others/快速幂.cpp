@@ -1,25 +1,15 @@
 #include<stdio.h>
-
-int power(int a,int b){
-	int base=1;
-	a %= 1000;
-	while(b > 1){
-		if(b % 2 == 1){
-			base = base*a%1000;
-			a = (a*a)%1000;
-			b /= 2;
+int main()
+{
+	int a,b,c;
+	while(scanf("%d %d",&a,&b),a*b){
+		c=1;
+		for(int i=0;i<b;i++){
+			a %= 100;
+			c *= a;
 		}
-		else {
-			a = (a*a)%1000;
-			b /= 2;
-		}
-	}
-	return a*base%1000;
-}
-int main(){
-	int n,m;
-	while(scanf("%d %d",&n,&m) && n+m != 0){
-		printf("%d\n",power(n,m));
+		c %= 1000;
+		printf("%d\n",c);
 	}
 	return 0;
-} 
+}

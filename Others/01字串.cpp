@@ -1,19 +1,15 @@
-#include<stdio.h>
-int a[5];
-
+#include<iostream>
+using namespace std;
 int main(){
-	int ans=0;
 	for(int i=0;i<32;i++){
-		int b=i;
-		ans = 0;
-		for(int j=0;j<5;j++){
-			a[ans] = b%2;
-			b = b/2;
-			ans++;
+		int a[5] = {0};
+		int n=4,b=i;
+		while(b>0){
+			a[n--] = b % 2;
+			b /= 2;
 		}
-		for(int k=4;k>=0;k--)
-		printf("%d",a[k]);
-		printf("\n");
+		for(int j=0;j<5;j++)
+		printf("%d",a[j]);
+		printf("\n"); 
 	}
-	return 0;
-} 
+}

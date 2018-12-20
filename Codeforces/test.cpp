@@ -1,11 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
-
-int main(){
-	int n;
-	string s;
-	cin >> n >> s;
-	sort(s.begin(), s.end());
-	cout << s << endl;
+int main()
+{
+	freopen("in1.txt","w", stdout);
+	cout << 
 	return 0;
 }

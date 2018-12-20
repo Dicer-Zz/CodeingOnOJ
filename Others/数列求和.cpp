@@ -1,15 +1,26 @@
 #include<stdio.h>
-#include<math.h>
-
-int main(){
-	double n,m;
-	while(~scanf("%lf %lf",&n,&m)){
-		double sum = 0;
-		for(int i=0;i<m;i++){
-			sum += n;
-			n = sqrt(n);
+int main()
+{
+	int n;
+	double sum;
+	sum = 0;
+	scanf("%d",&n);
+	n += 1;
+	while(n--)
+	{
+		if(n % 2 != 0)
+		{
+		double m;
+		m=n;
+		sum =sum + (1/m);
 		}
-		printf("%.2lf\n",sum);
-	}
-	return 0;
-}
+		else if( n != 0)
+		{
+		double m;
+		m=n;
+		sum =sum - (1/m);
+		} 
+	 } 
+	 printf("%.3lf",sum);
+	return 0 ;
+ } 
