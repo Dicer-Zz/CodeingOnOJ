@@ -1,7 +1,7 @@
 /*---------------------------------
 
  @Author:   Dicer
- @DateTime: 2018-12-22 11:26:03
+ @DateTime: 2018-12-20 21:04:32
 
 ---------------------------------*/
 
@@ -22,48 +22,33 @@ const double eps = 1e-8;
 const ll LLINF = 0x3f3f3f3f3f3f3f3f;
 const int INF = 0x3f3f3f3f;
 const int mod = 1e9+7;
-const int MAXN = 1e6 + 7;
+const int MAXN = 2e5 + 7;
 const int MAXM = 1e5;
 
-ll a[MAXN];
+int sta[MAXN];
 int main(int argc, char const *argv[])
 {
-	#ifndef ONLINE_JUDGE
-	    freopen("in.txt", "r", stdin);
-	    freopen("out.txt", "w", stdout);
-	#endif
-	
-	int T;
-	cin >> T;
-	while(T--){
-		int n, x;
-		cin >> n;
-		a[1] = 0;
-		for(int i=1;i<n;++i){
-			cin >> x;
-			a[i+1] = a[i] + x;
+	int n, x, base = 0,top = 0, pre = -1, flag = 1;
+	cin >> n;
+	for(int i=1;i<=n;++i){
+		cin >> x;
+		if(top == base){
+			sta[++top] = x;
+			flag = 1;
 		}
-		if(n == 2){
-			cout << 0 << ' ' << a[n] << endl;
-			continue;
-		}
-		cout << 0 << ' ' << a[n] << ' ';
-		int l = 1, r = n-1;
-		ll sum = a[n], last = a[n];
-		for(int i=3;i<=n;++i){
-			if(i&1){
-				sum += last;
-				l++;
+		else{
+			if(sta[top] == x && (x >= pre || flag)){
+				--top;
+				pre = x;
+				flag = 0;
+			} else{
+				sta[++top] = x;
+				flag = 1;
 			}
-			else {
-				last += a[r]-a[l];
-				sum += last;
-				r--;
-			}
-			if(i == n)	cout << sum << endl;
-			else cout << sum << ' ';
 		}
 	}
+	if(top - base >= 2)	puts("NO");
+	else if(top == base || sta[top] >= pre)	puts("YES");
+	else	puts("NO");
 	return 0;
 }
-//0 2 5 6 10
